@@ -531,7 +531,7 @@ let otherProjectGroupes = document.querySelectorAll(
   ".work .other-projects .project-boxes .group"
 );
 showMoreOtherProjectBtn.addEventListener("click", () => {
-  if (showMoreOtherProjectBtn.innerHTML === "Show More") {
+  if (showMoreOtherProjectBtn.classList.contains('show-more')) {
     for (let i = 0; i < otherProjectGroupes.length; i++) {
       if (!otherProjectGroupes[i].classList.contains("active")) {
         otherProjectGroupes[i].classList.add("active");
@@ -545,6 +545,7 @@ showMoreOtherProjectBtn.addEventListener("click", () => {
         }, 500);
         if (i === otherProjectGroupes.length - 1) {
           showMoreOtherProjectBtn.innerHTML = "Show Less";
+          showMoreOtherProjectBtn.classList.replace('show-more','show-less')
         }
         break;
       }
@@ -558,6 +559,7 @@ showMoreOtherProjectBtn.addEventListener("click", () => {
           groupBoxes[j].classList.remove("show");
         }
         showMoreOtherProjectBtn.innerHTML = "Show More";
+        showMoreOtherProjectBtn.classList.replace('show-less','show-more')
       }
     }
   }
