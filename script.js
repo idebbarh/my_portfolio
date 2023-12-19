@@ -200,7 +200,6 @@ window.addEventListener("load", () => {
               break;
             case "objectName":
               value.container.innerHTML += "<br>";
-              console.log(value);
               await delay(80);
               for (let char of Array.from(value.content)) {
                 value.container.innerHTML += char;
@@ -228,7 +227,6 @@ window.addEventListener("load", () => {
               }
               break;
             default:
-              console.log(key);
               value.container.innerHTML += value.content;
           }
           await delay(80);
@@ -302,18 +300,157 @@ window.addEventListener("load", () => {
         }
       });
     });
-    //other project hover effect
-    let otherProjectsBoxes = document.querySelectorAll(
-      ".work .other-projects .project-boxes .box",
-    );
-    otherProjectsBoxes.forEach((box) => {
+    function getOtherProjectBox({ link, title, description, languages }) {
+      const box = document.createElement("div");
+      box.classList.add("box");
+      const langElements = languages
+        .map((lang) => {
+          return `<li class="leng">${lang}</li>`;
+        })
+        .join("");
+      box.innerHTML = `
+        <div class="header">
+                    <i class="fa-solid fa-folder folder-icon"></i>
+                    <a
+                      href="${link}"
+                      target="_blank"
+                      ><i
+                        class="fa-solid fa-arrow-up-right-from-square other-projects-link-icon"
+                      ></i
+                    ></a>
+            </div>
+                  <h4 class="other-project-title">${title}</h4>
+                  <p class="other-project-desc">
+                    ${description}
+                  </p>
+                  <ul class="other-project-leng">
+            ${langElements}
+                  </ul>
+
+`;
+
       box.addEventListener("mouseover", () => {
         box.classList.add("active");
       });
       box.addEventListener("mouseleave", () => {
         box.classList.remove("active");
       });
+      return box;
+    }
+    const projectBoxes = document.querySelector(
+      ".work .other-projects .project-boxes",
+    );
+    // link, title, description, languages
+    const otherProjects = [
+      {
+        link: "https://idebbarh.github.io/My_First_HTML_and_CSS_Project/",
+        title: "Leon website",
+        description: "Leon agency website",
+        languages: ["html", "css"],
+      },
+      {
+        link: "https://idebbarh.github.io/Kasper_My_Template_Two/",
+        title: "Kasper website",
+        description: "Kasper website",
+        languages: ["html", "css"],
+      },
+
+      {
+        link: "https://idebbarh.github.io/Elzero_My_Template_Three/",
+        title: "Elzero web school website",
+        description: "Elzero web school website",
+        languages: ["html", "css"],
+      },
+
+      {
+        link: "https://idebbarh.github.io/Rockstar_Games/",
+        title: "Rockstar games website clone",
+        description: "Rockstar games website clone",
+        languages: ["html", "css"],
+      },
+
+      {
+        link: "https://idebbarh.github.io/Epic_Games_Store/",
+        title: "Epic games store clone",
+        description: "Epic games store clone",
+        languages: ["html", "css"],
+      },
+
+      {
+        link: "https://idebbarh.github.io/Adidas_Website_Template/",
+        title: "Adidas website clone",
+        description: "Adidas website clone",
+        languages: ["html", "css", "javascript"],
+      },
+
+      {
+        link: "https://idebbarh.github.io/Shopify_Website_Template/",
+        title: "Shopify website clone",
+        description: "Shopify website clone",
+        languages: ["html", "css", "javascript"],
+      },
+      {
+        link: "https://idebbarh.github.io/To_Do_List_App/",
+        title: "To-do list app",
+        description:
+          "Plan, organize, and collaborate on any project with powerful task management that can be customized for every need.",
+        languages: ["html", "css", "javascript"],
+      },
+      {
+        link: "https://idebbarh.github.io/Leetcode_Patterns/",
+        title: "LeetCode patterns",
+        description:
+          "Categorized coding challenges by type and difficulty (Easy, Medium, Hard), offering a dynamic learning experience with a random problem feature. Ideal for mastering algorithmic patterns.",
+        languages: ["html", "css", "javascript"],
+      },
+      {
+        link: "https://idebbarh.github.io/movies_recommender/",
+        title: "Movies Recommender",
+        description:
+          "Indecisive about what movie to watch? Answer 5 questions, and our recommendation engine will handle the rest! Streamline your choices and enjoy the perfect movie night effortlessly.",
+        languages: ["html", "css", "javascript"],
+      },
+      {
+        link: "https://movea-app-ismail-debbarh.netlify.app/",
+        title: "Movea",
+        description:
+          "Movies app fetches movie data from TMDB API and displays it in a beautifully designed UI with smooth animations and has both a dark and light mode.",
+        languages: ["react", "css", "context API", "framer motion", "TMDB API"],
+      },
+      {
+        link: "https://vim-be-good.netlify.app/",
+        title: "Vim-Be-Good for browser",
+        description:
+          "Browser-based tool that helps users improve their skills in using Vim motions.",
+        languages: ["react", "css", "redux"],
+      },
+
+      {
+        link: "https://6581804a91512714d7fc5df3--monumental-zuccutto-db4c97.netlify.app/",
+        title: "Conway's Game of Life Simulator",
+        description:
+          "Experience Conway's Game of Life with our interactive simulator! Watch mesmerizing patterns emerge as cells evolve based on simple rules. Explore the beauty of cellular automata and witness the captivating dynamics of Life.",
+        languages: ["react", "typescript", "tailwindCss"],
+      },
+    ];
+
+    let boxesGroup = document.createElement("div");
+    let boxesCount = 0;
+    boxesGroup.classList = "group active first-group";
+    otherProjects.reverse().forEach((project) => {
+      const projectBox = getOtherProjectBox(project);
+      boxesGroup.appendChild(projectBox);
+      boxesCount++;
+      if (boxesCount >= 6) {
+        projectBoxes.appendChild(boxesGroup);
+        boxesGroup = document.createElement("div");
+        boxesGroup.classList = "group";
+        boxesCount = 0;
+      }
     });
+    if (boxesCount > 0) {
+      projectBoxes.appendChild(boxesGroup);
+    }
     //show more other project effect
     let showMoreOtherProjectBtn = document.querySelector(
       ".work .other-projects .show-more-other-project-btn",

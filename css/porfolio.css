@@ -739,6 +739,7 @@ header .links a:hover .link-num {
   position: relative;
   width: calc(calc(100% - 2rem) / 3);
   padding-left: 1rem;
+  text-transform: capitalize;
 }
 
 .about-me .container #about-me-description .about-me-skills-item::before {
@@ -1015,6 +1016,7 @@ header .links a:hover .link-num {
   display: flex;
   gap: 10px;
   align-items: flex-end;
+  flex-wrap: wrap;
   color: var(--parag-color);
   opacity: 0.6;
   flex: 1;
@@ -1024,6 +1026,9 @@ header .links a:hover .link-num {
   .work .other-projects .project-boxes .box .other-project-leng {
     font-size: 0.875rem;
   }
+}
+.work .other-projects .project-boxes .box .other-project-leng .leng {
+  text-transform: capitalize;
 }
 .work .other-projects .show-more-other-project-btn {
   width: fit-content;
